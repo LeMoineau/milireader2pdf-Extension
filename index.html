@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Milireader2pdf Extension</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/jspdf.min.js"></script>
+    <style>
+      .green { color: #1abc9c; }
+      .red { color: #e74c3c; }
+    </style>
+  </head>
+  <body>
+    <h1 id="title">Milireader2pdf</h1>
+    <p id="credit">by Pierrot le Moineau 🐦</p>
+    <button type="button" id="generatePDF-button" name="button" onclick="test()">Générer le PDF</button>
+    <div id="statut-message">
+      <p class="statut-message-line"> Clique sur le bouton ci-dessus pour lancer la génération !</p>
+    </div>
+    <script src="scripts/constants.js"></script>
+    <script src="scripts/journal.js"></script>
+    <script src="scripts/script.js"></script>
+  </body>
+</html>

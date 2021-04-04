@@ -1,0 +1,17 @@
+{
+ "manifest_version": 2, // Indique la version du manifest (toujours 2)
+ "name": "Milireader2pdf", // Le nom de votre extension
+ "description": "Convertisseur du lecteur milibris-reader à fichier pdf", // La description
+ "version": "1.0", // La version en en l'occurrence la première donc 1.0
+ "permissions": [ // Les permissions, on y reviendra plus bas
+  "http://*/*",
+  "https://*/*"
+ ],
+ "browser_action": {   // Les paramètres
+  "default_icon" : "icons/icon48.png", // L'icône qui s'affiche en haut à droite de votre navigateur
+  "default_popup": "index.html" // Le popup qui s'affichera quand vous cliquez sur l'îcone
+ },
+ "icons": { // L'îcone qui s'affichera lorse que vous êtes sur la page extensions des paramètre
+  "128" : "icons/icon128.png" // 128 = 128x128 la taille de votre image
+ }
+}

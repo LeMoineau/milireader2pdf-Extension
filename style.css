@@ -1,0 +1,64 @@
+
+body {
+
+  padding: 10px;
+  width: 250px;
+
+}
+
+#title {
+
+  white-space: nowrap;
+  margin: 0;
+
+}
+
+#credit {
+
+  margin: 0;
+  margin-bottom: 20px;
+
+}
+
+#generatePDF-button {
+
+  color: white;
+  border-radius: 3px;
+  padding: 15px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #2ecc71;
+  border: none;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 5px;
+
+}
+
+#generatePDF-button:hover {
+
+  background-color: #27ae60;
+
+}
+
+#statut-message {
+
+  overflow-x: hidden;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  height: auto;
+
+}
+
+.statut-message-line {
+
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 3px;
+
+}
