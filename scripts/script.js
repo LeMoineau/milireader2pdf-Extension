@@ -1,10 +1,43 @@
 
-var journal = new Journal();
+function getBgScript() {
+  return chrome.extension.getBackgroundPage()
+}
+
+function generate2cancelButton() {
+  generatePDF_button.classList.add("cancel")
+  generatePDF_button.textContent = "Annuler la génération"
+  generatePDF_button.onclick = function() {
+    getBgScript().cancelled = true
+    generatePDF_button.classList.remove("cancel")
+    generatePDF_button.textContent = "Générer le PDF"
+    statut_message.innerHTML = "";
+    addTextToMessageDiv("Clique sur le bouton ci-dessus pour lancer la génération !");
+    normalComportement()
+  }
+}
 
 window.onload = function () {
 
-  generatePDF_button.onclick = () => {
+  if (getBgScript().generationInProgressing) {
+    generate2cancelButton()
+    addTextToMessageDiv(`un journal est déjà en cours de création`, "green");
+    progress_page_line = document.createElement("p");
+    progress_page_line.classList.add("statut-message-line");
+    progress_page_line.classList.add("green");
+    statut_message.appendChild(progress_page_line);
+    setInterval(function() {
+      progress_page_line.textContent = `pages en cours de génération (${getBgScript().currentPage}/${getBgScript().maxPage})`;
+    }, 500)
+  } else {
+    normalComportement()
+  }
 
+}
+
+function normalComportement() {
+  var journal = new Journal();
+
+  generatePDF_button.onclick = () => {
     getTabHtml((all_html) => {
       statut_message.innerHTML = "";
       addTextToMessageDiv("lancement de la génération du pdf...");
@@ -26,9 +59,10 @@ window.onload = function () {
           progress_page_line.classList.add("green");
           pages_length = result_json.pages.length;
           statut_message.appendChild(progress_page_line);
-          journal.generatePages((page) => {
+          getBgScript().generatePages(journal.journal_key, journal.material, (page) => {
             progress_page_line.textContent = `pages en cours de génération (${page}/${pages_length})`;
           });
+          generate2cancelButton()
         });
       } else {
         addTextToMessageDiv("clé de journal pas trouvée...", "red")
@@ -36,7 +70,6 @@ window.onload = function () {
     });
 
   }
-
 }
 
 function getTabHtml(callback) {

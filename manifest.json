@@ -7,6 +7,10 @@
   "http://*/*",
   "https://*/*"
  ],
+ "background": {
+   "scripts": ["scripts/bg.js", "scripts/jspdf.min.js"],
+   "persistent": true
+ },
  "browser_action": {   // Les paramètres
   "default_icon" : "icons/icon48.png", // L'icône qui s'affiche en haut à droite de votre navigateur
   "default_popup": "index.html" // Le popup qui s'affichera quand vous cliquez sur l'îcone

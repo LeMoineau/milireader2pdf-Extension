@@ -44,6 +44,12 @@ body {
 
 }
 
+#generatePDF-button.cancel {
+
+  background-color: #e74c3c
+  
+}
+
 #statut-message {
 
   overflow-x: hidden;
