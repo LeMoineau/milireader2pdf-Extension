@@ -1,7 +1,4 @@
 
-const JOURNAL_KEY_BEGIN = "https://content.milibris.com/access/html5-reader/";
-const JOURNAL_KEY_END = "/pages/jpeg/ld/";
-
 var generationInProgressing = false
 var currentPage = 0
 var maxPage = 0
@@ -65,7 +62,7 @@ async function generatePages(journal_key, material, callback_update) {
           tile_height = hd.height%hd.tile_height;
         }
 
-        let img_url = JOURNAL_KEY_BEGIN + journal_key + "/" + hd.path
+        let img_url = journal_key + "/" + hd.path
           + `/tile${(col + "").padStart(2,'0')}x${(row + "").padStart(2,'0')}.jpeg`;
         console.log(img_url);
         var logo = await getDataUri(img_url);

@@ -1,6 +1,5 @@
 
-const JOURNAL_KEY_BEGIN = "https://content.milibris.com/access/html5-reader/";
-const JOURNAL_KEY_END = "/pages/jpeg/ld/";
+const JOURNAL_KEY_REGEX = "(https\:\/\/content.\.milibris\.com\/access\/html5\-reader\/.[^\/]*)\/pages\/jpeg\/ld\/"
 
 class Journal {
 
@@ -17,9 +16,14 @@ class Journal {
   getJournalKey(all_html) {
 
     console.log("Journal key: ");
-    if (all_html !== undefined && all_html.includes(JOURNAL_KEY_BEGIN) && all_html.includes(JOURNAL_KEY_END)) {
-      this.journal_key = all_html.split(JOURNAL_KEY_BEGIN)[1].split(JOURNAL_KEY_END)[0];
-      this.key_find = true;
+    let reg = new RegExp(JOURNAL_KEY_REGEX);
+    if (all_html !== undefined) {
+      let result = all_html.match(reg);
+      if (result !== null) {
+        console.log(result)
+        this.journal_key = result[1];
+        this.key_find = true;
+      }
     }
     console.log(this.getState());
     return this.getState();
@@ -28,7 +32,7 @@ class Journal {
 
   getMaterialJSON(callback_error, callback_success) {
     if (this.key_find) {
-      var url = JOURNAL_KEY_BEGIN + this.journal_key + "/material.json";
+      var url = this.journal_key + "/material.json";
       fetch(url).then((result) => {
         if (result.status !== 200) {
           callback_error(result);

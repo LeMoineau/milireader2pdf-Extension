@@ -37,6 +37,8 @@ window.onload = function () {
 function normalComportement() {
   var journal = new Journal();
 
+  generatePDF_button.classList.toggle("cancel", false)
+  generatePDF_button.textContent = "Générer le PDF"
   generatePDF_button.onclick = () => {
     getTabHtml((all_html) => {
       statut_message.innerHTML = "";
@@ -61,8 +63,11 @@ function normalComportement() {
           statut_message.appendChild(progress_page_line);
           getBgScript().generatePages(journal.journal_key, journal.material, (page) => {
             progress_page_line.textContent = `pages en cours de génération (${page}/${pages_length})`;
+            if (page === pages_length) {
+              normalComportement();
+            }
           });
-          generate2cancelButton()
+          generate2cancelButton();
         });
       } else {
         addTextToMessageDiv("clé de journal pas trouvée...", "red")
